@@ -1,0 +1,28 @@
+﻿CREATE SEQUENCE user_id_seq;
+CREATE SEQUENCE roles_id_seq;
+CREATE SEQUENCE projects_id_seq;
+CREATE SEQUENCE users_projects_id_seq;
+
+CREATE TABLE Users(
+id integer DEFAULT NEXTVAL('user_id_seq'),
+login VARCHAR(80) NOT NULL,
+password VARCHAR(80) NOT NULL,
+first_name VARCHAR(80),
+second_name VARCHAR(80),
+PRIMARY KEY (id)
+);
+
+CREATE TABLE Projects(
+id integer DEFAULT NEXTVAL('projects_id_seq'),
+title VARCHAR(80) NOT NULL,
+PRIMARY KEY (id)
+);
+
+CREATE TABLE Task(
+id integer DEFAULT NEXTVAL('users_projects_id_seq'),
+user_id integer NOT NULL REFERENCES Users(id),
+project_id integer NOT NULL REFERENCES Projects(id),
+date_begin TIMESTAMP,
+date_finish TIMESTAMP,
+PRIMARY KEY (id)
+);
