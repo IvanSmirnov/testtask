@@ -2,7 +2,7 @@ package net.ismirnov.projectmanager.dao;
 
 import java.util.List;
 
-import net.ismirnov.projectmanager.form.User;
+import net.ismirnov.projectmanager.model.User;
 
 public interface UserDAO {
 	public void addUser(User user);

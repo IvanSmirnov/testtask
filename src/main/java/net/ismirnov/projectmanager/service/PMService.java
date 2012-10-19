@@ -2,9 +2,9 @@ package net.ismirnov.projectmanager.service;
 
 import java.util.List;
 
-import net.ismirnov.projectmanager.form.User;
-import net.ismirnov.projectmanager.form.Project;
-import net.ismirnov.projectmanager.form.Task;
+import net.ismirnov.projectmanager.model.Project;
+import net.ismirnov.projectmanager.model.Task;
+import net.ismirnov.projectmanager.model.User;
 
 public interface PMService {
 	

@@ -1,4 +1,4 @@
-package net.ismirnov.projectmanager.form;
+package net.ismirnov.projectmanager.model;
 
 import java.util.List;
 import java.util.Set;

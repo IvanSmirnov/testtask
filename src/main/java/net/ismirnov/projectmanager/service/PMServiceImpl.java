@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import net.ismirnov.projectmanager.dao.UserDAO;
 import net.ismirnov.projectmanager.dao.ProjectDAO;
 import net.ismirnov.projectmanager.dao.TaskDAO;
-import net.ismirnov.projectmanager.form.User;
-import net.ismirnov.projectmanager.form.Project;
-import net.ismirnov.projectmanager.form.Task;
+import net.ismirnov.projectmanager.model.Project;
+import net.ismirnov.projectmanager.model.Task;
+import net.ismirnov.projectmanager.model.User;
 
 @Service
 public class PMServiceImpl implements PMService {

@@ -2,8 +2,8 @@ package net.ismirnov.projectmanager.dao;
 
 import java.util.List;
 
-import net.ismirnov.projectmanager.form.Project;
-import net.ismirnov.projectmanager.form.User;
+import net.ismirnov.projectmanager.model.Project;
+import net.ismirnov.projectmanager.model.User;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +30,8 @@ public class ProjectDAOImpl implements ProjectDAO{
 		}
 	}
 
-	public int updateProject(Project project) {
+	public void updateProject(Project project) {
 		sessionFactory.getCurrentSession().update( project );
-		return 0;
 	}
 
 }

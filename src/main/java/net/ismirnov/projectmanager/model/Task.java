@@ -1,4 +1,4 @@
-package net.ismirnov.projectmanager.form;
+package net.ismirnov.projectmanager.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

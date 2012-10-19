@@ -1,4 +1,4 @@
-package net.ismirnov.projectmanager.form;
+package net.ismirnov.projectmanager.model;
 
 import java.util.Collection;
 import java.util.HashSet;

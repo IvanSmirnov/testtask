@@ -5,9 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import net.ismirnov.projectmanager.form.User;
-import net.ismirnov.projectmanager.form.Project;
-import net.ismirnov.projectmanager.form.Task;
+import net.ismirnov.projectmanager.model.Project;
+import net.ismirnov.projectmanager.model.Task;
+import net.ismirnov.projectmanager.model.User;
 import net.ismirnov.projectmanager.service.PMService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +30,12 @@ public class PMController {
 
 	@RequestMapping("/index")
 	public String redirect(Map<String, Object> map) {
-		map.put("user", new User());
 		map.put("userList", pmService.listUsers());
 		return "redirect:/listusers";
 	}
 	
 	@RequestMapping("/listusers")
 	public String listUsers(Map<String, Object> map) {
-		map.put("user", new User());
 		map.put("userList", pmService.listUsers());
 		return "/admin/users";
 	}
@@ -49,8 +47,7 @@ public class PMController {
 	}
 
 	@RequestMapping(value = "/adduser", method = RequestMethod.POST)
-	public String addUser(@ModelAttribute("user")
-						User user, BindingResult result) {
+	public String addUser(@ModelAttribute("user") User user, BindingResult result) {
 		pmService.addUser(user);
 		return "redirect:/listusers";
 	}
@@ -64,7 +61,6 @@ public class PMController {
 	//----------------Projects page-----------------------
 	@RequestMapping("/listprojects")
 	public String listProjects(Map<String, Object> map) {
-		map.put("project", new Project());
 		map.put("projectList", pmService.listProjects());
 		return "/admin/projects";
 	}
@@ -83,15 +79,13 @@ public class PMController {
 	}
 	
 	@RequestMapping("/deleteproject/{projectId}")
-	public String deleteProject(@PathVariable("projectId")
-	Integer projectId) {
+	public String deleteProject(@PathVariable("projectId") Integer projectId) {
 		pmService.removeProject(projectId);
 		return "redirect:/listprojects";
 	}
 	
 	@RequestMapping("/tasks")
 	public String tasksPage(Map<String, Object> map) {
-		map.put("project", new Project());
 		map.put("projectList", pmService.listProjects());
 		return "/admin/tasks";
 	}
@@ -103,9 +97,7 @@ public class PMController {
 		List<Task> tasks = pmService.listTaskByProjectId( projectId );
 		
 		ModelAndView mvc = new ModelAndView("/admin/user_table");
-		mvc.addObject("user", new User());
 		mvc.addObject("userList", users);
-		mvc.addObject("task", new Task());
 		mvc.addObject("taskList", tasks);
 		return mvc;
 	}
@@ -126,7 +118,6 @@ public class PMController {
 	
 	@RequestMapping("/userpage")
 	public String userMainPage(Map<String, Object> map) {
-		map.put("user", new User());
 		map.put("userList", pmService.listUsers());
 		return "/user_page";
 	}
@@ -136,7 +127,6 @@ public class PMController {
 			Integer userId) {
 		List<Task> tasks = pmService.listTaskByUserId( userId );
 		ModelAndView mvc = new ModelAndView("/task_table");
-		mvc.addObject("task", new Task());
 		mvc.addObject("taskList", tasks);
 		return mvc;
 	}

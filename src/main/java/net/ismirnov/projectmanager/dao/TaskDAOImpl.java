@@ -2,9 +2,10 @@ package net.ismirnov.projectmanager.dao;
 
 import java.util.List;
 
-import net.ismirnov.projectmanager.form.Task;
 import java.util.Date;
-import net.ismirnov.projectmanager.form.User;
+
+import net.ismirnov.projectmanager.model.Task;
+import net.ismirnov.projectmanager.model.User;
 import net.ismirnov.projectmanager.dao.TaskDAO;
 
 import org.hibernate.SessionFactory;
@@ -32,9 +33,8 @@ public class TaskDAOImpl implements TaskDAO{
 		}
 	}
 
-	public int updateTask(Task task) {
+	public void updateTask(Task task) {
 		sessionFactory.getCurrentSession().update( task );
-		return 0;
 	}
 	
 	public List<Task> listTaskByProject(Integer projectId){

@@ -2,8 +2,9 @@ package net.ismirnov.projectmanager.dao;
 
 import java.util.List;
 
-import net.ismirnov.projectmanager.form.Task;
-import net.ismirnov.projectmanager.form.User;
+import net.ismirnov.projectmanager.model.Task;
+import net.ismirnov.projectmanager.model.User;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.hibernate.Query;
