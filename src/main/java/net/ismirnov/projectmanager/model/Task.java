@@ -8,7 +8,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
-
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 
@@ -33,14 +32,12 @@ public class Task {
 	@Column(name="date_finish")
 	private Date date_finish;
 
-    @ManyToOne
-    @JoinColumn(name="user_id", insertable=false, updatable=false,
-            nullable=false)
+	@ManyToOne
+	@JoinColumn(name="user_id", insertable=false, updatable=false, nullable=false)
 	private User user;
     
-    @ManyToOne
-    @JoinColumn(name="project_id", insertable=false, updatable=false,
-            nullable=false)
+	@ManyToOne
+	@JoinColumn(name="project_id", insertable=false, updatable=false, nullable=false)
 	private Project project;
 
 	public Project getProject() {
@@ -98,5 +95,4 @@ public class Task {
 	public void setDate_finish(Date date_finish) {
 		this.date_finish = date_finish;
 	}
-	
 }

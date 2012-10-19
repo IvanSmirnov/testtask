@@ -2,7 +2,6 @@ package net.ismirnov.projectmanager.model;
 
 import java.util.List;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,8 +25,8 @@ public class Project {
 	@Column(name="title")
 	private String title;
 	
-    @OneToMany(mappedBy="project", fetch = FetchType.EAGER)
-    private List<Task> tasks;
+	@OneToMany(mappedBy="project", fetch = FetchType.EAGER)
+	private List<Task> tasks;
 
 	public List<Task> getTasks() {
 		return tasks;
@@ -37,10 +36,10 @@ public class Project {
 		this.tasks = tasks;
 	}
 	
-    public void addTask(Task task){
-    	task.setProject(this);
-    	tasks.add(task);
-    }
+	public void addTask(Task task){
+		task.setProject(this);
+		tasks.add(task);
+	}
 
 	public Integer getId() {
 		return id;
@@ -57,5 +56,4 @@ public class Project {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 }

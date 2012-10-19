@@ -46,13 +46,13 @@ public class User{
 	@Column(name="second_name")
 	private String second_name;
 	
-    @OneToMany(mappedBy="user", fetch = FetchType.EAGER)
-    private List<Task> tasks;
-    
-    public void addTask(Task task){
-    	task.setUser(this);
-    	tasks.add(task);
-    }
+	@OneToMany(mappedBy="user", fetch = FetchType.EAGER)
+	private List<Task> tasks;
+
+	public void addTask(Task task){
+	    	task.setUser(this);
+	    	tasks.add(task);
+    	}
 	
 	public List<Task> getTasks() {
 		return tasks;
@@ -101,5 +101,4 @@ public class User{
 	public void setSecond_name(String second_name) {
 		this.second_name = second_name;
 	}
- 
 }

@@ -1,13 +1,10 @@
 package net.ismirnov.projectmanager.dao;
 
 import java.util.List;
-
 import java.util.Date;
-
 import net.ismirnov.projectmanager.model.Task;
 import net.ismirnov.projectmanager.model.User;
 import net.ismirnov.projectmanager.dao.TaskDAO;
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -46,9 +43,8 @@ public class TaskDAOImpl implements TaskDAO{
 		return (List<Task>)sessionFactory.getCurrentSession().
 		createQuery(" from Task where user_id = :userId and date_begin " +
 				"<= :current_date and date_finish >= :current_date")
-																	.setInteger("userId", userId)
-																	.setDate("current_date", new Date())
-																	.list();
+				.setInteger("userId", userId)
+				.setDate("current_date", new Date()).list();
 	}
 	
 	public void removeTaskByUserId(Integer userId){

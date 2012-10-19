@@ -58,7 +58,7 @@ public class PMController {
 		pmService.removeUser(userId);
 		return "redirect:/listusers";
 	}
-	//----------------Projects page-----------------------
+
 	@RequestMapping("/listprojects")
 	public String listProjects(Map<String, Object> map) {
 		map.put("projectList", pmService.listProjects());
@@ -66,14 +66,14 @@ public class PMController {
 	}
 	
 	@RequestMapping(value = "/updateproject", method = RequestMethod.POST)
-	public @ResponseBody String updateUser(@ModelAttribute("project") Project project, BindingResult result ) {
+	public @ResponseBody String updateUser(@ModelAttribute("project") Project project, 
+						BindingResult result ) {
 		pmService.updateProject(project);
 		return project.getId().toString();
 	}
 
 	@RequestMapping(value = "/addproject", method = RequestMethod.POST)
-	public String addProject(@ModelAttribute("project")
-						Project project, BindingResult result) {
+	public String addProject(@ModelAttribute("project") Project project, BindingResult result) {
 		pmService.addProject(project);
 		return "redirect:/listprojects";
 	}
@@ -91,8 +91,7 @@ public class PMController {
 	}
 	
 	@RequestMapping("/listtasksbyproject/{projectId}")
-	public ModelAndView listUsersTasks(@PathVariable("projectId")
-			Integer projectId) {
+	public ModelAndView listUsersTasks(@PathVariable("projectId") Integer projectId) {
 		List<User> users = pmService.listUsersNotInProject( projectId );
 		List<Task> tasks = pmService.listTaskByProjectId( projectId );
 		
@@ -103,15 +102,13 @@ public class PMController {
 	}
 	
 	@RequestMapping(value = "/addtask", method = RequestMethod.POST)
-	public @ResponseBody String addTask(@ModelAttribute("task")
-						Task task, BindingResult result) {
+	public @ResponseBody String addTask(@ModelAttribute("task") Task task, BindingResult result) {
 		pmService.addTask(task);
 		return Integer.toString( task.getId() );
 	}
 	
 	@RequestMapping(value = "/removetask/{taskId}")
-	public @ResponseBody String removeTask(@PathVariable("taskId")
-			Integer taskId) {
+	public @ResponseBody String removeTask(@PathVariable("taskId") Integer taskId) {
 		pmService.removeTask(taskId);
 		return Integer.toString( taskId );
 	}
@@ -123,8 +120,7 @@ public class PMController {
 	}
 	
 	@RequestMapping("/listtasksbyuser/{userId}")
-	public ModelAndView listTasksByUser(@PathVariable("userId")
-			Integer userId) {
+	public ModelAndView listTasksByUser(@PathVariable("userId") Integer userId) {
 		List<Task> tasks = pmService.listTaskByUserId( userId );
 		ModelAndView mvc = new ModelAndView("/task_table");
 		mvc.addObject("taskList", tasks);

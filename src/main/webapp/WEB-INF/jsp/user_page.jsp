@@ -12,35 +12,7 @@
 	<script src="./static/js/ui/jquery.ui.mouse.js"></script>
 	<script src="./static/js/ui/jquery.ui.button.js"></script>
 	<link rel="stylesheet" href="./static/css/demos.css">
-	<style type="text/css">
-		.table_data, .table_data td {
-			border-collapse: collapse;
-			border: 1px solid #aaa;
-			margin: 2px;
-			padding: 10px;
-		}
-		.table_data th {
-			font-weight: bold;
-			background-color: #5C82FF;
-			color: white;
-		}
-		.delete_button {
-	   		display:block;
-			margin: 2px;
-	   		background: url('./static/img/remove.png');
-	   		width:24px;
-	   		height:24px;
-		}
-		body { font-size: 80%; }
-		label, input { display:block; }
-		input.text { margin-bottom:12px; width:95%; padding: .4em; }
-		fieldset { padding:0; border:0; margin-top:25px; }
-		h1 { font-size: 2em; margin: .8em 0; }
-		div#users-contain { width: 350px; margin: 20px 0; }
-		div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-		div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
-	</style>
-		<script>
+	<script>
 	$(function() { $("#search_button").click(function( event ) {
 			var selected_usr_id = $("#user_selector").val();
 			if( selected_usr_id != null )

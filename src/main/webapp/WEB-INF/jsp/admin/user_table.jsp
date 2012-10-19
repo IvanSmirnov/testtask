@@ -4,30 +4,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-	<style type="text/css">
-		body {
-			font-family: sans-serif;
-		}
-		.data, .data td {
-			border-collapse: collapse;
-			margin: 10px;
-			padding: 2px;
-		}
-		.data th {
-			font-weight: bold;
-			background-color: #5C82FF;
-			color: white;
-			width: 300px;
-		}	
-		.delete_button {
-	   		display:block;
-			margin: 2px;
-	   		background: url('./static/img/remove.png');
-	   		width:24px;
-	   		height:24px;
-		}
-	</style>
-
 </head>
 <body>
 
