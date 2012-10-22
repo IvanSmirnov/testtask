@@ -1,0 +1,68 @@
+package net.ismirnov.test;
+
+import static org.junit.Assert.*;
+
+import java.util.List;
+
+import net.ismirnov.projectmanager.dao.ProjectDAO;
+import net.ismirnov.projectmanager.dao.TaskDAO;
+import net.ismirnov.projectmanager.dao.UserDAO;
+import net.ismirnov.projectmanager.model.Project;
+import net.ismirnov.projectmanager.model.Task;
+import net.ismirnov.projectmanager.model.User;
+
+import org.junit.runner.RunWith;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.junit.Test;
+import junit.framework.Assert;
+import org.springframework.transaction.annotation.Transactional;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath:/WEB-INF/spring-servlet.xml"})
+@TestExecutionListeners({
+    DependencyInjectionTestExecutionListener.class,
+    DirtiesContextTestExecutionListener.class,
+    TransactionalTestExecutionListener.class})
+public class TaskDaoTest {
+    @Autowired
+    UserDAO user_dao;
+    @Autowired
+    TaskDAO task_dao;
+    @Autowired
+    ProjectDAO project_dao;
+
+    @Test  
+    public void testTaskDao() throws Exception {
+    	assertNotNull(task_dao);
+    }
+  
+    @Test
+    @Transactional
+    public void testAddTask()  throws Exception {
+    	Task task = new Task();
+	Project project = ProjectDaoTest.createProject();
+	project_dao.addProject( project );
+	List<Project> saved_projects = project_dao.listProjects();
+
+	User user = UserDaoTest.createUser();
+	user_dao.addUser( user );
+	List<User> saved_users = user_dao.listUsers();
+	
+    	task.setUser_id( saved_users.get(0).getId() );
+    	task.setProject_id( saved_projects.get(0).getId() );
+	task.setUser( saved_users.get(0) );
+	task.setProject( saved_projects.get(0));
+
+    	task_dao.addTask( task );
+    	List<Task> saved_tasks = task_dao.listTasks();
+    	assertNotNull(saved_tasks);
+    	assertTrue( saved_tasks.size() == 1 );
+    }
+}

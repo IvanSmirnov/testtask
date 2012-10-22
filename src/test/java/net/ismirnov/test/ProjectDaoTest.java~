@@ -1,0 +1,88 @@
+package net.ismirnov.test;
+
+import static org.junit.Assert.*;
+
+import java.util.List;
+
+import net.ismirnov.projectmanager.dao.ProjectDAO;
+import net.ismirnov.projectmanager.dao.TaskDAO;
+import net.ismirnov.projectmanager.dao.UserDAO;
+import net.ismirnov.projectmanager.model.Project;
+import net.ismirnov.projectmanager.model.Task;
+import net.ismirnov.projectmanager.model.User;
+
+import org.junit.runner.RunWith;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.junit.Test;
+import junit.framework.Assert;
+import org.springframework.transaction.annotation.Transactional;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath:/WEB-INF/spring-servlet.xml"})
+@TestExecutionListeners({
+    DependencyInjectionTestExecutionListener.class,
+    DirtiesContextTestExecutionListener.class,
+    TransactionalTestExecutionListener.class})
+public class ProjectDaoTest {
+	private final String project_title = new String("ProjectTitle");
+	public static Project createProject(){
+		Project project = new Project();
+		project.setTitle(project_title);
+		return project;
+	}
+    @Autowired
+    UserDAO user_dao;
+    @Autowired
+    TaskDAO task_dao;
+    @Autowired
+    ProjectDAO project_dao;
+
+    @Test  
+    public void testProjectDao() throws Exception {
+    	assertNotNull(project_dao);
+    }
+  
+    @Test
+    @Transactional
+    public void testAddProject()  throws Exception {
+    	Project project = createProject();
+    	project_dao.addProject(project);
+    	List<Project> saved_projects_list = project_dao.listProjects();
+    	assertNotNull(saved_projects_list);
+    	assertTrue( saved_projects_list.size() == 1 );
+    	Project saved_project = saved_projects_list.get(0);
+    	assertNotNull( saved_project );
+    	assertEquals( saved_project.getTitle(), project_title );
+    }
+    
+    @Test
+    @Transactional
+    public void testUpdateProject()  throws Exception {
+    	Project project = createProject();
+    	project_dao.addProject(project);
+    	project.setTitle("New Title");
+    	project_dao.updateProject(project);
+    	List<Project> saved_projects_list = project_dao.listProjects();
+    	Project updated_project = saved_projects_list.get(0);
+    	assertNotNull( updated_project );
+    	assertEquals( updated_project.getTitle(), "New Title" );
+    }
+    
+    @Test
+    @Transactional
+    public void testRemoveProject()  throws Exception {
+    	project_dao.addProject( createProject() );
+    	List<Project> saved_projects_list = project_dao.listProjects();
+    	project_dao.removeProject( saved_projects_list.get(0).getId() );
+    	saved_projects_list = project_dao.listProjects();
+    	assertNotNull( saved_projects_list );
+    	assertEquals( saved_projects_list.size(), 0 );
+    }
+}

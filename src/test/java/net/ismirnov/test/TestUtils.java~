@@ -1,0 +1,22 @@
+package net.ismirnov.test;
+
+import net.ismirnov.projectmanager.model.Project;
+import net.ismirnov.projectmanager.model.User;
+
+public class TestUtils {
+	public static final String first_name = new String("Ivan");
+	public static final String second_name = new String("Smirnov");
+	public static final String login = new String("login");
+	public static final String password = new String("password");
+
+	
+	public static User createUser(){
+		User user = new User();
+	    	user.setFirst_name( first_name );
+	    	user.setLogin( login );
+	    	user.setPassword(password);
+	    	user.setSecond_name(second_name);
+		return user;
+	}
+
+}
